@@ -1,0 +1,76 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+class Comparablee {
+    public static void main(String[] args) {
+        List<Movie> al = new ArrayList<>();
+        al.add(new Movie(2023, "rrkpk", 8.8));
+        al.add(new Movie(2023, "gadar2", 9.0));
+        al.add(new Movie(2023, "satyaprem ki katha", 9.2));
+
+        System.out.println("Original List:");
+        System.out.println(al);
+
+        
+        Collections.sort(al);
+        System.out.println("Sorted by rating (Comparable):");
+        System.out.println(al);
+
+        
+        Collections.sort(al, Movie.getYearComparator());
+        System.out.println("Sorted by year (Comparable):");
+        System.out.println(al);
+    }
+}
+
+class Movie implements Comparable<Movie> {
+    private int year;
+    private String name;
+    private double rating;
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public Movie(int year, String name, double rating) {
+        this.year = year;
+        this.name = name;
+        this.rating = rating;
+    }
+
+    @Override
+    public int compareTo(Movie m) {
+        if (this.rating > m.rating) {
+            return -1;
+        } else if (this.rating < m.rating) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "[year=" + this.year + ", name=" + this.name + ", rating=" + this.rating + "]";
+    }
+
+  
+    public static Comparator<Movie> getYearComparator() {
+        return new Comparator<Movie>() {
+            @Override
+            public int compare(Movie m1, Movie m2) {
+                return m1.getYear() - m2.getYear();
+            }
+        };
+    }
+}
