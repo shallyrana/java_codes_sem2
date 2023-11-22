@@ -1,0 +1,56 @@
+import java.util.*;
+public class Try {
+	    public static void main(String[] args) {
+	        TreeMap<String, String> studentGrades = new TreeMap<>();
+
+	        Scanner scanner = new Scanner(System.in);
+	        while (true) {
+	            System.out.println("1. Add Student");
+	            System.out.println("2. Remove Student");
+	            System.out.println("3. Modify Grade");
+	            System.out.println("4. Print All Grades");
+	            System.out.println("5. Exit");
+	            System.out.print("Enter your choice: ");
+	            int choice = scanner.nextInt();
+	            scanner.nextLine(); // Consume newline
+
+	            switch (choice) {
+	                case 1:
+	                    System.out.print("Enter student name: ");
+	                    String name = scanner.nextLine();
+	                    System.out.print("Enter grade: ");
+	                    String grade = scanner.nextLine();
+	                    studentGrades.put(name, grade);
+	                    break;
+	                case 2:
+	                    System.out.print("Enter student name to remove: ");
+	                    String removeName = scanner.nextLine();
+	                    studentGrades.remove(removeName);
+	                    break;
+	                case 3:
+	                    System.out.print("Enter student name to modify grade: ");
+	                    String modifyName = scanner.nextLine();
+	                    if (studentGrades.containsKey(modifyName)) {
+	                        System.out.print("Enter new grade: ");
+	                        String newGrade = scanner.nextLine();
+	                        studentGrades.put(modifyName, newGrade);
+	                    } else {
+	                        System.out.println("Student not found.");
+	                    }
+	                    break;
+	                case 4:
+	                    System.out.println("Student Grades:");
+	                    for (Map.Entry<String, String> entry : studentGrades.entrySet()) {
+	                        System.out.println(entry.getKey() + ": " + entry.getValue());
+	                    }
+	                    break;
+	                case 5:
+	                    System.out.println("Exiting program.");
+	                    scanner.close();
+	                    System.exit(0);
+	                default:
+	                    System.out.println("Invalid choice. Please choose again.");
+	            }
+	        }
+	    }
+	}
